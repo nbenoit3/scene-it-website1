@@ -1,0 +1,26 @@
+body {
+	background-color: #066290;
+}
+
+.header h2 {
+	color: #DC4247;
+	font-weight: bold;
+}
+
+.header p {
+	color: #FFFFFF;
+}
+
+.results {
+	margin-top: 20px;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	text-decoration: none;
+}
