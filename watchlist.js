@@ -1,7 +1,9 @@
+var movieContainer = document.getElementById("movie-container");
+
 
 function renderWatchlist(movies) {
     var watchlistHTML = movies.map(function(currentMovie) {
-        var movieHTML = `
+        return `
         <div class="movie card m-3" style="width: 20rem;">
         <img class="card-img-top" src="${currentMovie.Poster}" alt="#">
         <div class="card-body">
@@ -11,9 +13,8 @@ function renderWatchlist(movies) {
         </div>
     </div>
         `
-        return movieHTML;
     });
-    return watchlistHTML.join("");
+    movieContainer.innerHTML = watchlistHTML.join("");
 };
 
 
@@ -21,18 +22,38 @@ function renderWatchlist(movies) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    var movieContainer = document.getElementById("movie-container");
-
     var watchlistMoviesJSON = localStorage.getItem("watchlist");
 
     var watchlistMovies = JSON.parse(watchlistMoviesJSON);
 
-    movieContainer.innerHTML = renderWatchlist(watchlistMovies);
+    renderWatchlist(watchlistMovies);
 
 
 });
 
 
-function removeFromWatchlist() {
+function removeFromWatchlist(imdbID) {
+    var watchlistMoviesJSON2 = localStorage.getItem("watchlist");
+
+    var watchlistMovies2 = JSON.parse(watchlistMoviesJSON2);
+
+    var movieToRemove = watchlistMovies2.find(function(currentMovie) {
+        return currentMovie.imdbID == imdbID;
+    });
+
+    var newWatchList = watchlistMovies2.filter(function(currentMovie) {
+        return currentMovie != movieToRemove;
+    });
+
+    var newMovieWatchList = JSON.stringify(newWatchList);
+
+    localStorage.setItem("watchlist", newMovieWatchList);
+
+    var newListOfMoviesJSON = localStorage.getItem("watchlist");
+
+    var newListOfMovies = JSON.parse(newListOfMoviesJSON);
+
+    renderWatchlist(newListOfMovies);
 
 };
+

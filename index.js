@@ -37,6 +37,7 @@ function renderMovies(movieArray) {
 
             movies = response.data.Search;
         });
+
     });
 
 
